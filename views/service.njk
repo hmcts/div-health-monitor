@@ -4,6 +4,12 @@
     {% set alertLevel = "danger" %}
 {% endif %}
 
-<div class="border p-2 border-white alert-{{ alertLevel }}" style="min-width: 24rem;">
-    <h2>{{ service.name }} - {{ service.status }}</h2>
+<div class="border p-2 border-white alert-{{ alertLevel }}" style="min-width: 28rem;">
+    <h2 class="text-center text-uppercase">{{ service.name }} - {{ service.status }}</h2>
+    <ul>
+        {% for name, details in service.details %}
+            <li>{{ name }} - {{ details.status }}</li>
+        {% endfor %}
+        <p>{{ service.message }}</p>
+    </ul>
 </div>

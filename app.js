@@ -5,6 +5,8 @@ const request = require('request-promise-native').defaults({'proxy': 'http://pro
 const app = express();
 
 const port = 4000;
+const services = ['pfe', 'rfe', 'dn', 'cos', 'cms', 'cfs', 'fps', 'vs'];
+const env = 'aat';
 
 app.listen(port, () => console.log(`Listening on port ${port}!`));
 
@@ -13,11 +15,8 @@ nunjucks.configure('views', {
     express: app
 });
 
-app.get('/', async function (req, res) {
+async function fetchStatuses() {
     const results = [];
-
-    const services = ['pfe', 'rfe', 'dn', 'cos', 'cms', 'cfs', 'vs'];
-    const env = 'aat';
 
     for (const service of services) {
         try {
@@ -26,16 +25,33 @@ app.get('/', async function (req, res) {
                 `http://div-${service}-${env}.service.core-compute-${env}.internal/health`,
                 {
                     json: true,
-                    simple: false
+                    simple: false,
+                    rejectUnauthorized: false,
+                    timeout: 3000
                 }
             );
             console.log(`Successfully retrieved status of ${service}`);
-            results.push(Object.assign({name: service}, data));
+            let filteredDetails = {};
+            if (!data.hasOwnProperty('details')) {
+                const nonServiceKeys = ['status', 'buildInfo'];
+                filteredDetails = Object.keys(data)
+                    .filter(key => !nonServiceKeys.includes(key))
+                    .reduce((obj, key) => {
+                        obj[key] = data[key];
+                        return obj;
+                    }, {});
+            }
+            results.push(Object.assign({name: service, details: filteredDetails}, data));
         } catch (e) {
             console.error(`Error while checking status of ${service}`, e.message);
-            results.push(Object.assign({name: service, status: 'error'}));
+            results.push(Object.assign({name: service, status: 'DOWN', message: e.message}));
         }
     }
+    return results;
+}
+
+app.get('/', async function (req, res) {
+    const results = await fetchStatuses();
 
     res.render('index.njk', {
         title: 'Div Monitor',
