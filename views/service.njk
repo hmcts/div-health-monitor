@@ -1,0 +1,9 @@
+{% if service.status == "UP" %}
+    {% set alertLevel = "success" %}
+{% else %}
+    {% set alertLevel = "danger" %}
+{% endif %}
+
+<div class="border p-2 border-white alert-{{ alertLevel }}" style="min-width: 24rem;">
+    <h2>{{ service.name }} - {{ service.status }}</h2>
+</div>

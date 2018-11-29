@@ -1,0 +1,17 @@
+{
+  "name": "div-health-monitor",
+  "version": "1.0.0",
+  "description": "Health dashboard for Divroce apps",
+  "main": "app.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon -e js,html,njk --watch views app.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "nodemon": "^1.18.7",
+    "nunjucks": "^3.1.4",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.5"
+  }
+}
