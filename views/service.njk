@@ -1,14 +1,19 @@
 {% if service.status == "UP" %}
-    {% set alertLevel = "success" %}
+    {% set serviceAlertLevel = "success" %}
 {% else %}
-    {% set alertLevel = "danger" %}
+    {% set serviceAlertLevel = "danger" %}
 {% endif %}
 
-<div class="border p-2 border-white alert-{{ alertLevel }}" style="min-width: 28rem;">
+<div class="border p-2 border-white alert-{{ serviceAlertLevel }}" style="min-width: 28rem;">
     <h2 class="text-center text-uppercase">{{ service.name }} - {{ service.status }}</h2>
     <ul>
         {% for name, details in service.details %}
-            <li>{{ name }} - {{ details.status }}</li>
+            {% if details.status == "UP" %}
+                {% set dependencyAlertLevel = "success" %}
+            {% else %}
+                {% set dependencyAlertLevel = "danger" %}
+            {% endif %}
+            <li class="alert-{{ dependencyAlertLevel }}">{{ name }} - {{ details.status }}</li>
         {% endfor %}
         <p>{{ service.message }}</p>
     </ul>
