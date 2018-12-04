@@ -16,7 +16,8 @@
     "test:overnight": "NODE_PATH=.",
     "test:coverage": "NODE_PATH=. ",
     "test:a11y": "NODE_PATH=.",
-    "test:nsp": "NODE_PATH=."
+    "test:nsp": "NODE_PATH=.",
+    "sonar-scan": "node_modules/sonar-scanner/bin/sonar-scanner"
   },
   "dependencies": {
     "express": "^4.16.4",
@@ -24,5 +25,8 @@
     "nunjucks": "^3.1.4",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5"
+  },
+  "devDependencies": {
+    "sonar-scanner": "^3.1.0"
   }
 }
