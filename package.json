@@ -7,9 +7,9 @@
   "scripts": {
     "setup": "NODE_PATH=.",
     "dev": "NODE_PATH=. nodemon -e js,html,njk --watch views --watch . app.js",
-    "lint": "NODE_PATH=. nodemon -e js,html,njk --watch views --watch . app.js",
+    "lint": "NODE_PATH=.",
     "start": "NODE_PATH=. node app.js",
-    "test": "NODE_PATH=. echo 'success'",
+    "test": "NODE_PATH=.",
     "test:unit": "NODE_PATH=.",
     "test:e2e": "NODE_PATH=.",
     "test:smoke": "NODE_PATH=.",
