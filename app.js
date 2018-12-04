@@ -4,7 +4,7 @@ const request = require('request-promise-native').defaults({'proxy': 'http://pro
 
 const app = express();
 
-const port = 4000;
+const port = 3000;
 const services = ['pfe', 'rfe', 'dn', 'cos', 'cms', 'cfs', 'fps', 'vs'];
 const env = 'aat';
 
