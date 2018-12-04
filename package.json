@@ -5,7 +5,19 @@
   "main": "app.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon -e js,html,njk --watch views app.js"
+    "setup": "NODE_PATH=.",
+    "dev": "NODE_PATH=. nodemon -e js,html,njk --watch views --watch . app.js",
+    "lint": "NODE_PATH=.",
+    "start": "NODE_PATH=. node app.js",
+    "test": "NODE_PATH=.",
+    "test:unit": "NODE_PATH=.",
+    "test:e2e": "NODE_PATH=.",
+    "test:smoke": "NODE_PATH=.",
+    "test:overnight": "NODE_PATH=.",
+    "test:coverage": "NODE_PATH=. ",
+    "test:a11y": "NODE_PATH=.",
+    "test:nsp": "NODE_PATH=.",
+    "sonar-scan": "node_modules/sonar-scanner/bin/sonar-scanner"
   },
   "dependencies": {
     "express": "^4.16.4",
@@ -13,5 +25,8 @@
     "nunjucks": "^3.1.4",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5"
+  },
+  "devDependencies": {
+    "sonar-scanner": "^3.1.0"
   }
 }

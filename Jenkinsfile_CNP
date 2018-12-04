@@ -1,0 +1,16 @@
+#!groovy
+
+@Library("Infrastructure")
+
+String product = "div"
+String component = "health-monitor"
+
+withPipeline("nodejs", product, component) {
+  if (env.CHANGE_TITLE && !env.CHANGE_TITLE.startsWith('[PREVIEW]')) {
+    setVaultName('div')
+    enableDockerBuild()
+    enableDeployToAKS()
+  }
+
+  enableSlackNotifications('#div-dev')
+}
