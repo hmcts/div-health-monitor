@@ -25,7 +25,7 @@ async function fetchStatuses() {
         try {
             console.log(`Checking status of ${service}`);
             const data = await request.get(
-                `http://div-${service}-${env}.service.core-compute-${env}.internal/health`,
+                `http://div-${service}-${config.environment}.service.core-compute-${config.environment}.internal/health`,
                 {
                     json: true,
                     simple: false,
@@ -57,7 +57,7 @@ app.get('/', async function (req, res) {
     const results = await fetchStatuses();
 
     res.render('index.njk', {
-        title: 'Div Monitor',
+        title: `Divorce Monitor - ${config.environment}`,
         services: results
     });
 });
