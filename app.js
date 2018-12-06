@@ -1,6 +1,9 @@
 const nunjucks = require('nunjucks');
 const express = require('express');
 const request = require('request-promise-native').defaults({'proxy': 'http://proxyout.reform.hmcts.net:8080'});
+const healthcheck = require('@hmcts/nodejs-healthcheck');
+const config = require('config');
+const os = require('os');
 
 const app = express();
 
@@ -58,3 +61,12 @@ app.get('/', async function (req, res) {
         services: results
     });
 });
+
+app.get('/health', healthcheck.configure({
+    checks: () => {},
+    buildInfo: {
+        name: config.service.name,
+        host: os.hostname(),
+        uptime: process.uptime()
+    }
+}));
