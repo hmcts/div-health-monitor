@@ -7,11 +7,9 @@ const os = require('os');
 
 const app = express();
 
-const port = 3000;
 const services = ['pfe', 'rfe', 'dn', 'cos', 'cms', 'cfs', 'fps', 'vs'];
-const env = 'aat';
 
-app.listen(port, () => console.log(`Listening on port ${port}!`));
+app.listen(config.node.port, () => console.log(`Listening on port ${config.node.port}!`));
 
 nunjucks.configure('views', {
     autoescape: true,
