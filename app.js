@@ -16,6 +16,15 @@ nunjucks.configure('views', {
     express: app
 });
 
+function isJson(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
 async function fetchStatuses() {
     const results = [];
 
@@ -31,6 +40,10 @@ async function fetchStatuses() {
                     timeout: 3000
                 }
             );
+            if(!isJson(data)) {
+                console.error(`Unexpected response from ${service}`);
+                throw new Error(data);
+            }
             console.log(`Successfully retrieved status of ${service}`);
             let filteredDetails = {};
             if (!data.hasOwnProperty('details')) {
