@@ -27,21 +27,15 @@ module "frontend" {
     NODE_ENV = "${var.node_env}"
     NODE_PATH = "${var.node_path}"
 
-    BASE_URL = "${var.public_protocol}://${local.public_hostname}"
+    // Packages
+    PACKAGES_VERSION = "${var.packages_version}"
 
-    UV_THREADPOOL_SIZE = "${var.uv_threadpool_size}"
     NODE_CONFIG_DIR = "${var.node_config_dir}"
 
     // Logging vars
     REFORM_TEAM = "${var.reform_team}"
     REFORM_SERVICE_NAME = "${var.reform_service_name}"
     REFORM_ENVIRONMENT = "${var.env}"
-
-    // Packages
-    PACKAGES_NAME = "${var.packages_name}"
-    PACKAGES_PROJECT = "${var.packages_project}"
-    PACKAGES_ENVIRONMENT = "${var.packages_environment}"
-    PACKAGES_VERSION = "${var.packages_version}"
 
     DEPLOYMENT_ENV = "${var.deployment_env}"
 
