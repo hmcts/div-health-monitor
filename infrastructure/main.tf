@@ -41,7 +41,7 @@ module "frontend" {
     REFORM_SERVICE_NAME = "${var.reform_service_name}"
     REFORM_ENVIRONMENT = "${var.env}"
 
-    MONITOR_ENVIRONMENT = "${var.monitor_env ? var.monitor_env : var.env}"
+    MONITOR_ENVIRONMENT = "${var.env == "preview" ? "aat" : var.env}"
 
     DEPLOYMENT_ENV = "${var.deployment_env}"
 
