@@ -41,6 +41,8 @@ module "frontend" {
     REFORM_SERVICE_NAME = "${var.reform_service_name}"
     REFORM_ENVIRONMENT = "${var.env}"
 
+    MONITOR_ENVIRONMENT = "${var.monitor_env ? var.monitor_env : var.env}"
+
     DEPLOYMENT_ENV = "${var.deployment_env}"
 
     // Service name

@@ -6,4 +6,5 @@ metadata:
 data:
   # TODO - this should be changed once we deploy AAT to AKS
   REFORM_ENVIRONMENT: "aat"
+  MONITOR_ENVIRONMENT: "aat"
   NODE_ENV: "production"

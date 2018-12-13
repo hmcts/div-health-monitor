@@ -20,6 +20,8 @@ variable "location" {
 
 variable "env" { }
 
+variable "monitor_env" { }
+
 variable "ilbIp" { }
 
 variable "deployment_env" {
