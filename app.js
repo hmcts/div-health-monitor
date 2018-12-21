@@ -4,12 +4,13 @@ const request = require('request-promise-native').defaults({'proxy': 'http://pro
 const healthcheck = require('@hmcts/nodejs-healthcheck');
 const config = require('config');
 const os = require('os');
+const logger = require('@hmcts/nodejs-logging').Logger.getLogger(__filename);
 
 const app = express();
 
 const services = ['pfe', 'rfe', 'dn', 'cos', 'cms', 'cfs', 'fps', 'vs'];
 
-app.listen(config.node.port, () => console.log(`Listening on port ${config.node.port}!`));
+app.listen(config.node.port, () => logger.info(`Listening on port ${config.node.port}!`));
 
 nunjucks.configure('views', {
     autoescape: true,
@@ -30,7 +31,7 @@ async function fetchStatuses() {
 
     for (const service of services) {
         try {
-            console.log(`Checking status of ${service}`);
+            logger.info(`Checking status of ${service}`);
             const data = await request.get(
                 `http://div-${service}-${config.environment}.service.core-compute-${config.environment}.internal/health`,
                 {
@@ -41,10 +42,10 @@ async function fetchStatuses() {
                 }
             );
             if(!isJson(data)) {
-                console.error(`Unexpected response from ${service}`);
+                logger.error(`Unexpected response from ${service}`);
                 throw new Error(data);
             }
-            console.log(`Successfully retrieved status of ${service}`);
+            logger.info(`Successfully retrieved status of ${service}`);
             let filteredDetails = {};
             if (!data.hasOwnProperty('details')) {
                 const nonServiceKeys = ['status', 'buildInfo'];
@@ -57,7 +58,7 @@ async function fetchStatuses() {
             }
             results.push(Object.assign({name: service, details: filteredDetails}, data));
         } catch (e) {
-            console.error(`Error while checking status of ${service}`, e.message);
+            logger.error(`Error while checking status of ${service}`, e.message);
             results.push(Object.assign({name: service, status: 'DOWN', message: e.message}));
         }
     }
