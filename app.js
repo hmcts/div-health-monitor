@@ -32,9 +32,10 @@ async function fetchStatuses() {
 
     for (const service of services) {
         try {
-            logger.info(`Checking status of ${service}`);
+            let url = `http://div-${service}-${config.environment}.service.core-compute-${config.environment}.internal/health`;
+            logger.info(`Checking status of ${service} - ${url}`);
             const data = await request.get(
-                `http://div-${service}-${config.environment}.service.core-compute-${config.environment}.internal/health`,
+                url,
                 {
                     json: true,
                     simple: false,
@@ -60,6 +61,7 @@ async function fetchStatuses() {
             results.push(Object.assign({name: service, details: filteredDetails}, data));
         } catch (e) {
             logger.error(`Error while checking status of ${service}`, e.message);
+            logger.error(e);
             results.push(Object.assign({name: service, status: 'DOWN', message: JSON.stringify(e.message)}));
         }
     }
