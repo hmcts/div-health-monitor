@@ -45,6 +45,7 @@ async function fetchStatuses() {
             );
             if(!isJson(data)) {
                 logger.error(`Unexpected response from ${service}`);
+                logger.error(data);
                 throw new Error(data);
             }
             logger.info(`Successfully retrieved status of ${service}`);
