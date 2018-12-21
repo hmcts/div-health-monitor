@@ -5,6 +5,7 @@ const healthcheck = require('@hmcts/nodejs-healthcheck');
 const config = require('config');
 const os = require('os');
 const logging = require('@hmcts/nodejs-logging');
+const logger = logging.Logger.getLogger(__filename);
 
 const app = express();
 
