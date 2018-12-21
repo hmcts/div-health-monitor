@@ -18,15 +18,6 @@ nunjucks.configure('views', {
     express: app
 });
 
-function isJson(str) {
-    try {
-        JSON.parse(str);
-    } catch (e) {
-        return false;
-    }
-    return true;
-}
-
 async function fetchStatuses() {
     const results = [];
 
@@ -43,11 +34,6 @@ async function fetchStatuses() {
                     timeout: 3000
                 }
             );
-            if(!isJson(data)) {
-                logger.error(`Unexpected response from ${service}`);
-                logger.error(data);
-                throw new Error(data);
-            }
             logger.info(`Successfully retrieved status of ${service}`);
             let filteredDetails = {};
             if (!data.hasOwnProperty('details')) {
@@ -61,8 +47,7 @@ async function fetchStatuses() {
             }
             results.push(Object.assign({name: service, details: filteredDetails}, data));
         } catch (e) {
-            logger.error(`Error while checking status of ${service}`, e.message);
-            logger.error(e);
+            logger.error(`Error while checking status of ${service}`, e);
             results.push(Object.assign({name: service, status: 'DOWN', message: JSON.stringify(e.message)}));
         }
     }
