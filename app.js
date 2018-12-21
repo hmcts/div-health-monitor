@@ -82,3 +82,5 @@ app.get('/health', healthcheck.configure({
         uptime: process.uptime()
     }
 }));
+
+app.use(logger.Express.accessLogger());
