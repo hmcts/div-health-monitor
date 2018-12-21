@@ -4,7 +4,7 @@ const request = require('request-promise-native').defaults({'proxy': 'http://pro
 const healthcheck = require('@hmcts/nodejs-healthcheck');
 const config = require('config');
 const os = require('os');
-const logger = require('@hmcts/nodejs-logging').Logger.getLogger(__filename);
+const logging = require('@hmcts/nodejs-logging');
 
 const app = express();
 
@@ -59,7 +59,7 @@ async function fetchStatuses() {
             results.push(Object.assign({name: service, details: filteredDetails}, data));
         } catch (e) {
             logger.error(`Error while checking status of ${service}`, e.message);
-            results.push(Object.assign({name: service, status: 'DOWN', message: e.message}));
+            results.push(Object.assign({name: service, status: 'DOWN', message: JSON.stringify(e.message)}));
         }
     }
     return results;
@@ -83,4 +83,4 @@ app.get('/health', healthcheck.configure({
     }
 }));
 
-app.use(logger.Express.accessLogger());
+app.use(logging.Express.accessLogger());
