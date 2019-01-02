@@ -1,0 +1,5 @@
+environment: MONITOR_ENVIRONMENT
+NODE_ENV: NODE_ENV
+
+node:
+  port: PORT

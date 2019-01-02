@@ -1,0 +1,8 @@
+service:
+  name: 'divorce-health-monitor'
+
+environment: aat
+NODE_ENV: development
+
+node:
+  port: 3000

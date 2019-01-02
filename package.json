@@ -11,6 +11,7 @@
     "start": "NODE_PATH=. node app.js",
     "test": "NODE_PATH=.",
     "test:unit": "NODE_PATH=.",
+    "test:functional": "NODE_PATH=.",
     "test:e2e": "NODE_PATH=.",
     "test:smoke": "NODE_PATH=.",
     "test:overnight": "NODE_PATH=.",
@@ -20,6 +21,9 @@
     "sonar-scan": "node_modules/sonar-scanner/bin/sonar-scanner"
   },
   "dependencies": {
+    "@hmcts/nodejs-healthcheck": "^1.4.6",
+    "@hmcts/nodejs-logging": "^3.0.0",
+    "config": "^3.0.0",
     "express": "^4.16.4",
     "nodemon": "^1.18.7",
     "nunjucks": "^3.1.4",
