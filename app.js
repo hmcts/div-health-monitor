@@ -1,6 +1,6 @@
 const nunjucks = require('nunjucks');
 const express = require('express');
-const request = require('request-promise-native').defaults({'proxy': 'http://proxyout.reform.hmcts.net:8080'});
+const request = require('request-promise-native');
 const healthcheck = require('@hmcts/nodejs-healthcheck');
 const config = require('config');
 const os = require('os');
