@@ -1,6 +1,6 @@
 const nunjucks = require('nunjucks');
 const express = require('express');
-const request = require('request-promise-native');
+const request = require('request-promise-native').defaults({'proxy': 'http://proxyout.reform.hmcts.net:8080'});
 const healthcheck = require('@hmcts/nodejs-healthcheck');
 const config = require('config');
 const os = require('os');
@@ -18,22 +18,39 @@ nunjucks.configure('views', {
     express: app
 });
 
+function isJsonString(str) {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
+
 async function fetchStatuses() {
-    const results = [];
+  const results = [];
 
     for (const service of services) {
         try {
             let url = `http://div-${service}-${config.environment}.service.core-compute-${config.environment}.internal/health`;
             logger.info(`Checking status of ${service} - ${url}`);
-            const data = await request.get(
+            const response = await request.get(
                 url,
                 {
-                    json: true,
                     simple: false,
                     rejectUnauthorized: false,
+                    resolveWithFullResponse: true,
                     timeout: 3000
                 }
             );
+            const body = response.body;
+            console.log(body);
+            if(!isJsonString(body)) {
+              logger.error('Response is not JSON', response);
+              results.push(Object.assign({name: service, status: 'DOWN', message: `${response.statusCode} - ${response.statusMessage}`}));
+              continue;
+            }
+            const data = JSON.parse(body);
             logger.info(`Successfully retrieved status of ${service}`);
             let filteredDetails = {};
             if (!data.hasOwnProperty('details')) {
