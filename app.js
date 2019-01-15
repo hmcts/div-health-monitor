@@ -9,7 +9,7 @@ const logger = logging.Logger.getLogger(__filename);
 
 const app = express();
 
-const services = ['pfe', 'rfe', 'dn', 'cos', 'cms', 'cfs', 'fps', 'vs', 'dgs'];
+const services = ['pfe', 'rfe', 'dn', 'cos', 'cms', 'cfs', 'dgs', 'emca','fps', 'vs'];
 
 app.listen(config.node.port, () => logger.info(`Listening on port ${config.node.port}!`));
 
