@@ -44,7 +44,6 @@ async function fetchStatuses() {
                 }
             );
             const body = response.body;
-            console.log(body);
             if(!isJsonString(body)) {
               logger.error('Response is not JSON', response);
               results.push(Object.assign({name: service, status: 'DOWN', message: `${response.statusCode} - ${response.statusMessage}`}));
