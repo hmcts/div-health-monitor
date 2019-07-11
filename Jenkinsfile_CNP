@@ -12,5 +12,7 @@ withPipeline("nodejs", product, component) {
     enableDeployToAKS()
   }
 
-  enableSlackNotifications('#div-dev')
+  onMaster {
+    enableSlackNotifications('#div-dev')
+  }
 }
