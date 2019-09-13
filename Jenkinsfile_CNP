@@ -8,6 +8,6 @@ String component = "hm"
 withPipeline("nodejs", product, component) {
   if (env.CHANGE_TITLE && !env.CHANGE_TITLE.startsWith('[PREVIEW]')) {
     enableDockerBuild()
-    enableDeployToAKS()
+    installCharts()
   }
 }
