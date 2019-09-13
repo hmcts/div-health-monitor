@@ -11,7 +11,7 @@ locals {
 }
 
 module "frontend" {
-  source = "git@github.com:hmcts/cnp-module-webapp.git?ref=master"
+  source = "git@github.com:hmcts/cnp-module-webapp?ref=master"
   product = "${var.product}-${var.reform_service_name}"
   location = "${var.location}"
   env = "${var.env}"
