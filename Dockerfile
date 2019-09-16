@@ -1,10 +1,7 @@
-FROM node:8.12.0-stretch
-
-WORKDIR /opt/app
-
-COPY . /opt/app
-RUN yarn --production && yarn setup && yarn cache clean
-
-CMD [ "yarn", "start" ]
-
+FROM hmctspublic.azurecr.io/base/node/stretch-slim-lts-10:10-stretch-slim as base
+USER hmcts
+COPY --chown=hmcts:hmcts package.json yarn.lock ./
+RUN yarn install --production
+FROM base as runtime
+COPY . .
 EXPOSE 3000

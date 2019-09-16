@@ -1,0 +1,4 @@
+nodejs:
+    applicationPort: 3000
+    environment:
+        MONITOR_ENVIRONMENT: "aat"
