@@ -24,6 +24,7 @@ module "frontend" {
   common_tags = "${var.common_tags}"
   asp_name = "${local.asp_name}"
   asp_rg = "${local.asp_rg}"
+  enable_ase = false
 
   app_settings = {
 
