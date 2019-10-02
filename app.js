@@ -88,4 +88,6 @@ app.get('/health', healthcheck.configure({
     }
 }));
 
+app.get('/health/liveness', (req, res) => res.json({status: "UP"}));
+
 app.use(logging.Express.accessLogger());
