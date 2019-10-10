@@ -11,7 +11,7 @@ locals {
 }
 
 module "frontend" {
-  source = "git@github.com:hmcts/moj-module-webapp.git?ref=master"
+  source = "git@github.com:hmcts/cnp-module-webapp?ref=master"
   product = "${var.product}-${var.reform_service_name}"
   location = "${var.location}"
   env = "${var.env}"
@@ -24,6 +24,7 @@ module "frontend" {
   common_tags = "${var.common_tags}"
   asp_name = "${local.asp_name}"
   asp_rg = "${local.asp_rg}"
+  enable_ase = false
 
   app_settings = {
 

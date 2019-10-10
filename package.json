@@ -21,7 +21,7 @@
     "sonar-scan": "node_modules/sonar-scanner/bin/sonar-scanner"
   },
   "dependencies": {
-    "@hmcts/nodejs-healthcheck": "^1.4.6",
+    "@hmcts/nodejs-healthcheck": "^1.5.1",
     "@hmcts/nodejs-logging": "^3.0.0",
     "config": "^3.0.0",
     "express": "^4.16.4",
