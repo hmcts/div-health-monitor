@@ -9,7 +9,7 @@ const logger = logging.Logger.getLogger(__filename);
 
 const app = express();
 
-const services = ['pfe', 'rfe', 'dn', 'da', 'cos', 'cms', 'cfs', 'dgs', 'emca','fps', 'vs'];
+const services = ['pfe', 'rfe', 'dn', 'da', 'cos', 'cms', 'cfs', 'dgs', 'emca','fps'];
 
 app.listen(config.node.port, () => logger.info(`Listening on port ${config.node.port}!`));
 
@@ -87,5 +87,7 @@ app.get('/health', healthcheck.configure({
         uptime: process.uptime()
     }
 }));
+
+app.get('/health/liveness', (req, res) => res.json({status: "UP"}));
 
 app.use(logging.Express.accessLogger());
