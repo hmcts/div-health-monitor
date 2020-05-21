@@ -7,7 +7,6 @@ String component = "hm"
 
 withPipeline("nodejs", product, component) {
     enableDockerBuild()
-    installCharts()
     enableAksStagingDeployment()
     disableLegacyDeployment()
 }
