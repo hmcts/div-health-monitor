@@ -1,3 +1,4 @@
+apiVersion: v1
 description: Divorce - Health Monitor
 name: div-hm
 version: 1.1.0
