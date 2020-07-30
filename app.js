@@ -10,8 +10,6 @@ const logger = logging.Logger.getLogger(__filename);
 const app = express();
 
 const services = ['pfe', 'rfe', 'dn', 'da', 'cos', 'cms', 'cfs', 'dgs', 'emca','fps'];
-const aatServices = ['petitioner-frontend-aks.aat', 'respond-divorce-aks.aat', 'decree-nisi-aks.aat',
-    'decree-absolute-aks.aat', 'div-cos-aat', 'div-cms-aat', 'div-cfs-aat', 'div-dgs-aat', 'div-emca-aat','div-fps-aat'];
 
 app.listen(config.node.port, () => logger.info(`Listening on port ${config.node.port}!`));
 
@@ -35,11 +33,9 @@ async function fetchStatuses() {
     for (const service of services) {
         try {
             let url = `http://div-${service}-${config.environment}.service.core-compute-${config.environment}.internal/health`;
-            let aatUrl = `http://${aatServices}.service.core-compute-aat.internal/health`; //url structure differs on AAT environments
-            let requestUrl = config.environment === "aat" ? aatUrl : url
             logger.info(`Checking status of ${service} - ${url}`);
             const response = await request.get(
-                requestUrl,
+                url,
                 {
                     simple: false,
                     rejectUnauthorized: false,
