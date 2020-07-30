@@ -1,7 +1,7 @@
 {
   "name": "div-health-monitor",
   "version": "1.0.0",
-  "description": "Health dashboard for Divroce apps",
+  "description": "Health dashboard for Divorce apps",
   "main": "app.js",
   "license": "MIT",
   "scripts": {
@@ -25,12 +25,12 @@
     "@hmcts/nodejs-logging": "^3.0.0",
     "config": "^3.0.0",
     "express": "^4.16.4",
-    "nodemon": "^1.18.7",
     "nunjucks": "^3.1.4",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5"
   },
   "devDependencies": {
+    "nodemon": "^2.0.4",
     "sonar-scanner": "^3.1.0"
   }
 }
