@@ -4,7 +4,7 @@ provider "azurerm" {
 
 locals {
   local_env = (var.env == "preview" || var.env == "spreview") ? (var.env == "preview" ) ? "aat" : "saat" : var.env
-  aseName = data.terraform_remote_state.core_apps_compute.ase_name[0]
+  aseName = "core-compute-${var.env}"
   public_hostname = "${var.product}-${var.component}-${var.env}.service.${local.aseName}.internal"
   asp_name = var.env == "prod" ? "div-hm-prod" : "${var.raw_product}-${var.env}"
   asp_rg = var.env == "prod" ? "div-hm-prod" : "${var.raw_product}-${var.env}"
