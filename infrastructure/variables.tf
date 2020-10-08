@@ -18,13 +18,11 @@ variable "location" {
   default = "UK South"
 }
 
-variable "env" { }
+variable "env" {}
 
-variable "ilbIp" { }
+variable "ilbIp" {}
 
-variable "deployment_env" {
-  type = "string"
-}
+variable "deployment_env" {}
 
 variable "deployment_path" {
   default = "/opt/divorce/frontend"
@@ -38,11 +36,10 @@ variable "node_config_dir" {
   default = "D:\\home\\site\\wwwroot\\config"
 }
 
-variable "subscription" { }
+variable "subscription" {}
 
 // CNP settings
 variable "jenkins_AAD_objectId" {
-  type                        = "string"
   description                 = "(Required) The Azure AD object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies."
 }
 
@@ -58,9 +55,7 @@ variable "node_path" {
   default = "."
 }
 
-variable "additional_host_name" {
-  type = "string"
-}
+variable "additional_host_name" {}
 
 variable "packages_version" {
   default = "-1"
@@ -74,14 +69,12 @@ variable "frontend_service_name" {
   default = "divorce-health-monitor"
 }
 
-variable "component" {
-  type = "string"
-}
+variable "component" {}
 
 variable "capacity" {
   default = "1"
 }
 
 variable "common_tags" {
-  type = "map"
+  type = map(string)
 }

@@ -1,3 +1,3 @@
 output "reform_environment" {
-  value = "${var.env}"
+  value = var.env
 }
